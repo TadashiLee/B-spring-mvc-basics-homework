@@ -24,7 +24,7 @@ public class UserService {
         if(userMap.get(name) == null) {
             throw new UserNotExist("用户名不存在");
         }else {
-            if(userMap.get(name).getPassWord().equals(password)){
+            if(userMap.get(name).getPassword().equals(password)){
                 return userMap.get(name);
             }else {
                 throw new PasswordIsWrong("密码错误");
@@ -33,9 +33,9 @@ public class UserService {
     }
 
     public void register(User user){
-        if(userMap.get(user.getName()) == null){
+        if(userMap.get(user.getUsername()) == null){
             user.setId(userMap.size());
-            userMap.put(user.getName(), user);
+            userMap.put(user.getUsername(), user);
         }else {
             throw new UserExist("该用户名已被注册");
         }

@@ -17,13 +17,13 @@ public class User {
     Integer id;
 
     @NotEmpty
-    @Pattern(regexp = "[0-9A-Za-z_]{3,10}\n")
+    @Pattern(regexp = "[0-9A-Za-z_]{3,10}", message = "用户名不合法")
     @Size(min=3, max = 10)
-    private String name;
+    private String username;
 
     @NotEmpty
     @Size(min=5, max = 12)
-    private String passWord;
+    private String password;
 
     @NotEmpty
     @Email
