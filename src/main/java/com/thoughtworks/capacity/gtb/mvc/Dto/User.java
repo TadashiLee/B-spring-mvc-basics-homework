@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+    Integer id;
 
     @NotEmpty
     @Pattern(regexp = "[0-9A-Za-z_]{3,10}\n")
