@@ -2,6 +2,7 @@ package com.thoughtworks.capacity.gtb.mvc.Service;
 
 import com.thoughtworks.capacity.gtb.mvc.Dto.User;
 import com.thoughtworks.capacity.gtb.mvc.ErrorException.PasswordIsWrong;
+import com.thoughtworks.capacity.gtb.mvc.ErrorException.UserExist;
 import com.thoughtworks.capacity.gtb.mvc.ErrorException.UserNotExist;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,15 @@ public class UserService {
             }else {
                 throw new PasswordIsWrong("密码错误");
             }
+        }
+    }
+
+    public void register(User user){
+        if(userMap.get(user.getName()) == null){
+            user.setId(userMap.size());
+            userMap.put(user.getName(), user);
+        }else {
+            throw new UserExist("该用户名已被注册");
         }
     }
 }
