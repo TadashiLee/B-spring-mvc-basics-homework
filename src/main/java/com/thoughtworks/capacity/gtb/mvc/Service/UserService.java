@@ -7,17 +7,16 @@ import com.thoughtworks.capacity.gtb.mvc.ErrorException.UserNotExist;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
 
 @Service
 public class UserService {
     private Map<String, User> userMap = new HashMap<>();
 
     public UserService() {
-        userMap.put("lucky", new User(1,"lucky", "123", "123@qq.com"));
-        userMap.put("Tadashi", new User(2,"Tadashi", "111", "234@163.com"));
+        userMap.put("lucky", new User(1,"lucky", "12345", "123@qq.com"));
+        userMap.put("Tadashi", new User(2,"Tadashi", "11111", "234@163.com"));
     }
 
     public User login(String name, String password) {
