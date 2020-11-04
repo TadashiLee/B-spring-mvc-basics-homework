@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @ControllerAdvice
@@ -43,15 +45,15 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<ErrorResult> handle(ConstraintViolationException ex) {
+    public ResponseEntity<List<ErrorResult>> handle(ConstraintViolationException ex) {
         Set<ConstraintViolation<?>> violations = ex.getConstraintViolations();
-
+        List errorList = new ArrayList<>();
         String message = "";
-        for (ConstraintViolation<?> constraint : ex.getConstraintViolations()) {
+        for (ConstraintViolation<?> constraint : violations) {
             message = constraint.getMessage();
-            break;
+            ErrorResult errorResult = new ErrorResult(message);
+            errorList.add(errorResult);
         }
-        ErrorResult errorResult = new ErrorResult(message);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResult);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorList);
     }
 }
